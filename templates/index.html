@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="container mt-5">
+    <h1 class="mb-4">Apache Log Parser</h1>
+
+    <form method="POST" enctype="multipart/form-data" class="mb-4">
+        <div class="input-group">
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="inputGroupFile" name="file">
+                <label class="custom-file-label" for="inputGroupFile">Choose file</label>
+            </div>
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">Upload</button>
+            </div>
+        </div>
+    </form>
+
+    <h1 style="color: red"> Ban </h1>
+    {% if ban %}
+    <div class="table-responsive">
+
+        <table class="table table-hover table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">IP Address</th>
+                <th scope="col">Frequency</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr>
+                {% for row in ban %}
+            <tr>
+                <td>{{ row['N'] }}</td>
+                <td>{{ row['ip'] }}</td>
+                <td>{{ row['frequency'] }}</td>
+
+            </tr>
+            {% endfor %}
+
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+
+    <h1 style="color: green"> ALL </h1>
+    {% if data %}
+    <div class="table-responsive">
+
+        <table class="table table-hover table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">IP Address</th>
+                <th scope="col">Request Method</th>
+                <th scope="col">Request URL</th>
+                <th scope="col">Status Code</th>
+                <th scope="col">Date</th>
+                <th scope="col">User-Agent</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr>
+                {% for row in data %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+                <td>{{ row[4] }}</td>
+                <td>{{ row[5] }}</td>
+                <td>{{ row[6] }}</td>
+            </tr>
+            {% endfor %}
+
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+
+
+</div>
+{% endblock content %}
